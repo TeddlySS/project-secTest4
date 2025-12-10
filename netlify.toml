@@ -1,0 +1,27 @@
+# netlify.toml
+[build]
+  publish = "."
+
+# เปลี่ยน redirect ให้ทำเฉพาะ root "/" พอ
+[[redirects]]
+  from = "/"
+  to = "/home.html"
+  status = 200
+  force = false
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Content-Type = "application/javascript; charset=UTF-8"
+    
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Content-Type = "text/css; charset=UTF-8"

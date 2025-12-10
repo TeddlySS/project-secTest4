@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy"
+          content="
+          default-src 'self' https://*;
+          script-src 'self' 'unsafe-inline' 'unsafe-eval'
+              https://cdn.jsdelivr.net
+              https://unpkg.com
+              https://esm.sh
+              https://*.supabase.co
+              https://fonts.googleapis.com
+              https://fonts.gstatic.com
+              https://*;
+          style-src 'self' 'unsafe-inline'
+              https://fonts.googleapis.com
+              https://cdn.jsdelivr.net
+              https://unpkg.com
+              https://*;
+          font-src 'self' data:
+              https://fonts.gstatic.com
+              https://*;
+          img-src 'self' data: blob:
+              https://*;
+          connect-src 'self'
+              https://*.supabase.co
+              wss://*.supabase.co
+              https://*
+              wss://*;
+          media-src 'self' https://* blob:;
+          frame-src 'self' https://*;
+          object-src 'none';
+          base-uri 'self';
+          frame-ancestors 'self';
+          ">
+    <title>secXplore - Register</title>
+    <link rel="stylesheet" href="register.css" />
+  </head>
+  <body>
+    <div class="cyber-grid"></div>
+
+    <div class="particles" id="particles"></div>
+
+    <nav>
+      <div class="nav-container">
+        <a href="home.html" class="logo">
+          <span>secXplore</span>
+        </a>
+        <div class="nav-links">
+          <a href="home.html" class="nav-link">Home</a>
+          <a href="login.html" class="nav-link">Sign In</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="register-container">
+      <div class="register-header">
+        <h1 class="register-title">Create Account</h1>
+        <!-- <p class="register-subtitle">Join secXplore</p> -->
+      </div>
+
+      <form id="registerForm">
+        <div class="form-group">
+          <label for="username" class="form-label">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            class="form-input"
+            placeholder="Enter username (3-20 characters)"
+            required
+            minlength="3"
+            maxlength="20"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="email" class="form-label">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            class="form-input"
+            placeholder="Enter your email address"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="password" class="form-label">Password</label>
+          <div class="password-input-wrapper">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              class="form-input"
+              placeholder="Enter password (at least 8 characters)"
+              required
+              minlength="8"
+            />
+            <button
+              type="button"
+              class="toggle-password"
+              id="togglePassword"
+              onclick="togglePasswordVisibility('password', 'togglePassword')"
+            >
+              <svg
+                class="eye-icon eye-closed"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+              <svg
+                class="eye-icon eye-open"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                style="display: none"
+              >
+                <path
+                  d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"
+                ></path>
+                <line x1="1" y1="1" x2="23" y2="23"></line>
+              </svg>
+            </button>
+          </div>
+          <div class="password-strength" id="passwordStrength">
+            <div class="strength-indicator">
+              <div class="strength-bar" id="strengthBar"></div>
+            </div>
+            <span id="strengthText">Please enter a password</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="confirmPassword" class="form-label"
+            >Confirm Password</label
+          >
+          <div class="password-input-wrapper">
+            <input
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+              class="form-input"
+              placeholder="Confirm your password"
+              required
+            />
+            <button
+              type="button"
+              class="toggle-password"
+              id="toggleConfirmPassword"
+              onclick="togglePasswordVisibility('confirmPassword', 'toggleConfirmPassword')"
+            >
+              <svg
+                class="eye-icon eye-closed"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+              <svg
+                class="eye-icon eye-open"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                style="display: none"
+              >
+                <path
+                  d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"
+                ></path>
+                <line x1="1" y1="1" x2="23" y2="23"></line>
+              </svg>
+            </button>
+          </div>
+          <div class="password-match" id="passwordMatch"></div>
+        </div>
+
+        <!-- <div class="terms-checkbox">
+          <input type="checkbox" id="terms" name="terms" />
+          <label for="terms">
+            I agree to the
+            <a
+              href="#"
+              onclick="alert('Please contact administrator to view Terms of Service')"
+              >Terms of Service</a
+            >
+            and
+            <a
+              href="#"
+              onclick="alert('Please contact administrator to view Privacy Policy')"
+              >Privacy Policy</a
+            >
+          </label>
+        </div> -->
+
+        <button type="submit" class="register-btn" id="registerBtn" disabled>
+          Create Account
+        </button>
+      </form>
+
+      <div class="divider">
+        <span>or</span>
+      </div>
+
+      <div class="login-link">
+        <p>Already have an account? <a href="login.html">Sign in</a></p>
+      </div>
+    </div>
+
+    <script type="module" src="register.js"></script>
+  </body>
+</html>

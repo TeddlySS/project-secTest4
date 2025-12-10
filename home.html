@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy"
+          content="
+          default-src 'self' https://*;
+          script-src 'self' 'unsafe-inline' 'unsafe-eval'
+              https://cdn.jsdelivr.net
+              https://unpkg.com
+              https://esm.sh
+              https://*.supabase.co
+              https://fonts.googleapis.com
+              https://fonts.gstatic.com
+              https://*;
+          style-src 'self' 'unsafe-inline'
+              https://fonts.googleapis.com
+              https://cdn.jsdelivr.net
+              https://unpkg.com
+              https://*;
+          font-src 'self' data:
+              https://fonts.gstatic.com
+              https://*;
+          img-src 'self' data: blob:
+              https://*;
+          connect-src 'self'
+              https://*.supabase.co
+              wss://*.supabase.co
+              https://*
+              wss://*;
+          media-src 'self' https://* blob:;
+          frame-src 'self' https://*;
+          object-src 'none';
+          base-uri 'self';
+          frame-ancestors 'self';
+          ">
+    <title>secXplore - Home</title>
+    <link rel="stylesheet" href="home.css" />
+  </head>
+  <body>
+    <!-- Cyber Grid Background -->
+    <div class="cyber-grid"></div>
+
+    <!-- Floating Particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Navigation -->
+    <nav>
+      <div class="nav-container">
+        <a href="home.html" class="logo">
+          <span>secXplore</span>
+        </a>
+
+        <div class="hamburger-menu">
+          <button
+            class="nav-link"
+            id="hamburgerBtn"
+            aria-label="Toggle navigation"
+          >
+            &#9776;
+          </button>
+        </div>
+        <div class="nav-links">
+          <a href="home.html" class="nav-link">Home</a>
+          <a href="challenge.html" class="nav-link">Challenges</a>
+          <a href="leaderboard.html" class="nav-link">Scoreboard</a>
+
+          <div class="nav-user-area">
+            <a
+              href="login.html"
+              class="nav-link sign-in-btn loading-hidden"
+              id="navSignInBtn"
+            >
+              Sign In
+            </a>
+
+            <a
+              href="profile.html"
+              class="nav-link profile-pill loading-hidden"
+              id="navProfileBtn"
+            >
+              <img src="" alt="avatar" class="nav-avatar" id="navAvatar" />
+              <span id="navUsername"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <section class="hero-section">
+        <div class="hero-content">
+          <h1 class="hero-title">secXplore</h1>
+          <p class="hero-subtitle">Interactive Capture The Flag Platform</p>
+          <p class="hero-description">
+            ยินดีต้อนรับสู่แพลตฟอร์ม CTF
+            ที่ออกแบบมาเพื่อพัฒนาทักษะด้านความปลอดภัยทางไซเบอร์<br />
+            เรียนรู้ผ่านการลงมือปฏิบัติจริง พร้อมโจทย์ท้าทายที่หลากหลาย
+          </p>
+
+          <div class="hero-buttons">
+            <a href="login.html" class="btn-primary" id="heroCtaButton">
+              เริ่มต้นทันที
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Features Section -->
+    <section class="features-section">
+      <div class="section-header">
+        <h2 class="section-title">ฟีเจอร์หลัก</h2>
+        <p class="section-subtitle">สิ่งที่คุณจะได้รับจากแพลตฟอร์มของเรา</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <span class="feature-icon">🌐</span>
+          <h3 class="feature-title">Web Security</h3>
+          <p class="feature-description">
+            เรียนรู้เทคนิคการโจมตีและป้องกันเว็บแอปพลิเคชัน รวมถึง SQL
+            Injection, XSS, และอื่นๆ
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <span class="feature-icon">🔐</span>
+          <h3 class="feature-title">Cryptography</h3>
+          <p class="feature-description">
+            ถอดรหัส cipher ต่างๆ วิเคราะห์ระบบเข้ารหัส และทำความเข้าใจพื้นฐานของ
+            Cryptography
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <span class="feature-icon">🕵️</span>
+          <h3 class="feature-title">Digital Forensics</h3>
+          <p class="feature-description">
+            วิเคราะห์หลักฐานดิจิทัล ค้นหาข้อมูลที่ซ่อนอยู่ และเรียนรู้เทคนิค
+            Forensics ขั้นสูง
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <span class="feature-icon">🖥️</span>
+          <h3 class="feature-title">Network Security</h3>
+          <p class="feature-description">
+            วิเคราะห์ packet การโจมตีเครือข่าย และเทคนิคการป้องกันในระดับ
+            Network
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <span class="feature-icon">⚙️</span>
+          <h3 class="feature-title">Reverse Engineering</h3>
+          <p class="feature-description">
+            ถอดรหัส binary วิเคราะห์ malware และเรียนรู้เทคนิค Reverse
+            Engineering
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <span class="feature-icon">📱</span>
+          <h3 class="feature-title">Mobile Security</h3>
+          <p class="feature-description">
+            วิเคราะห์ Android/iOS apps เรียนรู้การ reverse APK และเทคนิค Mobile
+            Hacking
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+      <div class="stats-container">
+        <div class="stat-item">
+          <div class="stat-value" id="totalChallenges">0</div>
+          <div class="stat-label">Challenges</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="totalUsers">0</div>
+          <div class="stat-label">Users</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="totalSolves">0</div>
+          <div class="stat-label">Solves</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="totalCategories">0</div>
+          <div class="stat-label">Categories</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <!-- <section class="cta-section">
+        <h2 class="cta-title">พร้อมที่จะเริ่มต้นหรือยัง?</h2>
+        <p class="cta-description">
+          เข้าร่วมกับชุมชนนักเรียนรู้ด้านความปลอดภัยทางไซเบอร์<br />
+          พัฒนาทักษะของคุณผ่านโจทย์ท้าทายที่หลากหลาย
+        </p>
+        <a href="register.html" class="btn-primary"> สร้างบัญชีฟรี </a>
+      </section>
+    </main> -->
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>secXplore</h3>
+          <p>แพลตฟอร์ม CTF สำหรับการเรียนรู้<br />ความปลอดภัยทางไซเบอร์</p>
+        </div>
+
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <a href="home.html">Home</a>
+          <a href="leaderboard.html">Scoreboard</a>
+          <a href="login.html">Sign In</a>
+        </div>
+
+        <div class="footer-section">
+          <h3>Categories</h3>
+          <a href="challenge.html">Web Security</a>
+          <a href="challenge.html">Cryptography</a>
+          <a href="challenge.html">Forensics</a>
+          <a href="challenge.html">Network Security</a>
+        </div>
+
+        <div class="footer-section">
+          <h3>Support</h3>
+          <a href="#">Documentation</a>
+          <!-- <a href="#">FAQ</a> -->
+          <a href="#">Contact</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2025 secXplore. All rights reserved.</p>
+      </div>
+    </footer>
+    <script type="module" src="home.js"></script>
+  </body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy"
+          content="
+          default-src 'self' https://*;
+          script-src 'self' 'unsafe-inline' 'unsafe-eval'
+              https://cdn.jsdelivr.net
+              https://unpkg.com
+              https://esm.sh
+              https://*.supabase.co
+              https://fonts.googleapis.com
+              https://fonts.gstatic.com
+              https://*;
+          style-src 'self' 'unsafe-inline'
+              https://fonts.googleapis.com
+              https://cdn.jsdelivr.net
+              https://unpkg.com
+              https://*;
+          font-src 'self' data:
+              https://fonts.gstatic.com
+              https://*;
+          img-src 'self' data: blob:
+              https://*;
+          connect-src 'self'
+              https://*.supabase.co
+              wss://*.supabase.co
+              https://*
+              wss://*;
+          media-src 'self' https://* blob:;
+          frame-src 'self' https://*;
+          object-src 'none';
+          base-uri 'self';
+          frame-ancestors 'self';
+          ">
+    <title>secXplore - Leaderboard</title>
+    <link rel="stylesheet" href="leaderboard.css" />
+  </head>
+  <body>
+    <div class="cyber-grid"></div>
+
+    <div class="particles" id="particles"></div>
+
+    <nav>
+      <div class="nav-container">
+        <a href="home.html" class="logo">
+          <span>secXplore</span>
+        </a>
+
+        <div class="hamburger-menu">
+          <button
+            class="nav-link"
+            id="hamburgerBtn"
+            aria-label="Toggle navigation"
+          >
+            &#9776;
+          </button>
+        </div>
+        <div class="nav-links">
+          <a href="home.html" class="nav-link">Home</a>
+          <a href="challenge.html" class="nav-link">Challenges</a>
+          <a href="leaderboard.html" class="nav-link">Scoreboard</a>
+
+          <div class="nav-user-area">
+            <a
+              href="login.html"
+              class="nav-link sign-in-btn loading-hidden"
+              id="navSignInBtn"
+            >
+              Sign In
+            </a>
+
+            <a
+              href="profile.html"
+              class="nav-link profile-pill loading-hidden"
+              id="navProfileBtn"
+            >
+              <img src="" alt="avatar" class="nav-avatar" id="navAvatar" />
+              <span id="navUsername"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="main-content">
+      <div class="leaderboard-header">
+        <h1 class="page-title">🏆 Scoreboard</h1>
+        <p class="subtitle">Ranked by points</p>
+      </div>
+
+      <div class="podium-container" id="podiumContainer"></div>
+
+      <div class="leaderboard-container">
+        <div class="leaderboard-header-row">
+          <span class="col-rank">Rank</span>
+          <span class="col-user">User</span>
+          <span class="col-solved">Solved</span>
+          <span class="col-points">Points</span>
+        </div>
+
+        <div class="leaderboard-list" id="leaderboardList"></div>
+      </div>
+    </div>
+
+    <script type="module" src="leaderboard.js"></script>
+  </body>
+</html>

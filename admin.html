@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy"
+          content="
+          default-src 'self' https://*;
+          script-src 'self' 'unsafe-inline' 'unsafe-eval'
+              https://cdn.jsdelivr.net
+              https://unpkg.com
+              https://esm.sh
+              https://*.supabase.co
+              https://fonts.googleapis.com
+              https://fonts.gstatic.com
+              https://*;
+          style-src 'self' 'unsafe-inline'
+              https://fonts.googleapis.com
+              https://cdn.jsdelivr.net
+              https://unpkg.com
+              https://*;
+          font-src 'self' data:
+              https://fonts.gstatic.com
+              https://*;
+          img-src 'self' data: blob:
+              https://*;
+          connect-src 'self'
+              https://*.supabase.co
+              wss://*.supabase.co
+              https://*
+              wss://*;
+          media-src 'self' https://* blob:;
+          frame-src 'self' https://*;
+          object-src 'none';
+          base-uri 'self';
+          frame-ancestors 'self';
+          ">
+    <title>secXplore - Admin Panel</title>
+    <link rel="stylesheet" href="admin.css" />
+  </head>
+  <body>
+    <div class="cyber-grid"></div>
+
+    <nav class="admin-nav">
+      <div class="nav-container">
+        <div class="logo">
+          <span class="logo-text"
+            >secXplore <span class="admin-badge">ADMIN</span></span
+          >
+        </div>
+        <div class="nav-actions">
+          <div class="hamburger-menu">
+            <button
+              class="nav-link"
+              id="hamburgerBtn"
+              aria-label="Toggle navigation"
+            >
+              &#9776;
+            </button>
+          </div>
+
+          <span class="user-info">
+            <span id="adminUsername">Admin</span>
+          </span>
+
+          <button class="btn-secondary" onclick="switchToUserView()">
+            User View
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-menu">
+        <a
+          href="#dashboard"
+          class="menu-item active"
+          onclick="showSection('dashboard')"
+        >
+          <span class="menu-text">Dashboard</span>
+        </a>
+        <a
+          href="#challenges"
+          class="menu-item"
+          onclick="showSection('challenges')"
+        >
+          <span class="menu-text">Challenges</span>
+        </a>
+        <a href="#users" class="menu-item" onclick="showSection('users')">
+          <span class="menu-text">Users</span>
+        </a>
+        <a
+          href="#submissions"
+          class="menu-item"
+          onclick="showSection('submissions')"
+        >
+          <span class="menu-text">Submissions</span>
+        </a>
+      </div>
+
+      <div class="sidebar-actions">
+        <button
+          class="sidebar-btn sidebar-plain-btn"
+          onclick="switchToUserView()"
+        >
+          User View
+        </button>
+      </div>
+    </aside>
+
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-menu">
+        <a
+          href="#dashboard"
+          class="menu-item active"
+          onclick="showSection('dashboard')"
+        >
+          <span class="menu-text">Dashboard</span>
+        </a>
+        <a
+          href="#challenges"
+          class="menu-item"
+          onclick="showSection('challenges')"
+        >
+          <span class="menu-text">Challenges</span>
+        </a>
+        <a href="#users" class="menu-item" onclick="showSection('users')">
+          <span class="menu-text">Users</span>
+        </a>
+        <a
+          href="#submissions"
+          class="menu-item"
+          onclick="showSection('submissions')"
+        >
+          <span class="menu-text">Submissions</span>
+        </a>
+      </div>
+
+      <div class="sidebar-actions">
+        <button class="btn-primary sidebar-btn" onclick="switchToUserView()">
+          User View
+        </button>
+      </div>
+    </aside>
+
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-menu">
+        <a
+          href="#dashboard"
+          class="menu-item active"
+          onclick="showSection('dashboard')"
+        >
+          <span class="menu-text">Dashboard</span>
+        </a>
+        <a
+          href="#challenges"
+          class="menu-item"
+          onclick="showSection('challenges')"
+        >
+          <span class="menu-text">Challenges</span>
+        </a>
+        <a href="#users" class="menu-item" onclick="showSection('users')">
+          <span class="menu-text">Users</span>
+        </a>
+        <a
+          href="#submissions"
+          class="menu-item"
+          onclick="showSection('submissions')"
+        >
+          <span class="menu-text">Submissions</span>
+        </a>
+      </div>
+    </aside>
+
+    <main class="admin-main">
+      <section id="section-dashboard" class="admin-section active">
+        <div class="section-header">
+          <h1>Dashboard Overview</h1>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon blue"></div>
+            <div class="stat-info">
+              <h3 id="totalChallenges">0</h3>
+              <p>Total Challenges</p>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon green"></div>
+            <div class="stat-info">
+              <h3 id="totalUsers">0</h3>
+              <p>Registered Users</p>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon purple"></div>
+            <div class="stat-info">
+              <h3 id="totalSubmissions">0</h3>
+              <p>Total Submissions</p>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon orange"></div>
+            <div class="stat-info">
+              <h3 id="solveRate">0%</h3>
+              <p>Average Solve Rate</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="dashboard-row">
+          <div class="dashboard-card">
+            <h3>Submissions This Week</h3>
+            <canvas id="submissionsChart"></canvas>
+          </div>
+        </div> -->
+
+        <div class="dashboard-card">
+          <h3>Platform Activity Statistics (Last 7 Days)</h3>
+          <div class="stats-table-container">
+            <table class="stats-table">
+              <thead>
+                <tr>
+                  <th>Metric</th>
+                  <th>Today</th>
+                  <th>This Week</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody id="activityStatsBody">
+                <tr>
+                  <td><strong> New Registrations</strong></td>
+                  <td class="stat-number">9</td>
+                  <td class="stat-number">10</td>
+                  <td class="stat-number">65</td>
+                </tr>
+                <tr>
+                  <td><strong> Challenge Solves</strong></td>
+                  <td class="stat-number">89</td>
+                  <td class="stat-number">76</td>
+                  <td class="stat-number">542</td>
+                </tr>
+                <tr>
+                  <td><strong>Submissions</strong></td>
+                  <td class="stat-number">147</td>
+                  <td class="stat-number">132</td>
+                  <td class="stat-number">1,247</td>
+                </tr>
+                <!-- <tr>
+                  <td><strong> Active Users</strong></td>
+                  <td class="stat-number">62</td>
+                  <td class="stat-number">58</td>
+                  <td class="stat-number">156</td>
+                </tr> -->
+                <tr>
+                  <td><strong> Hints Used</strong></td>
+                  <td class="stat-number">23</td>
+                  <td class="stat-number">19</td>
+                  <td class="stat-number">167</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="section-challenges" class="admin-section">
+        <div class="section-header">
+          <div>
+            <h1>Challenges</h1>
+          </div>
+        </div>
+
+        <div class="filters-bar">
+          <input
+            type="text"
+            class="search-input"
+            placeholder=" Search challenges..."
+            id="challengeSearch"
+            onkeyup="filterChallenges()"
+          />
+          <select
+            class="filter-select"
+            id="categoryFilter"
+            onchange="filterChallenges()"
+          >
+            <option value="">All Categories</option>
+            <option value="web">Web Security</option>
+            <option value="crypto">Cryptography</option>
+            <option value="forensics">Digital Forensics</option>
+            <option value="network">Network Security</option>
+            <option value="reverse">Reverse Engineering</option>
+            <option value="mobile">Mobile Security</option>
+          </select>
+          <select
+            class="filter-select"
+            id="difficultyFilter"
+            onchange="filterChallenges()"
+          >
+            <option value="">All Difficulties</option>
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+            <option value="expert">Expert</option>
+          </select>
+        </div>
+
+        <div class="table-container">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Code</th>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Difficulty</th>
+                <th>Points</th>
+              </tr>
+            </thead>
+            <tbody id="challengesTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="section-hints" class="admin-section">
+        <div class="section-header">
+          <h1>Hints Manager</h1>
+          <p class="section-subtitle">Manage hints for all challenges</p>
+        </div>
+
+        <div class="hints-container">
+          <div class="hints-sidebar">
+            <h3>Select Challenge</h3>
+            <input
+              type="text"
+              class="search-input"
+              placeholder=" Search..."
+              id="hintChallengeSearch"
+              onkeyup="filterHintChallenges()"
+            />
+            <div class="hints-challenge-list" id="hintsChallengeList"></div>
+          </div>
+
+          <div class="hints-main">
+            <div id="noHintSelected" class="empty-state">
+              <div class="empty-icon"></div>
+              <h3>No Challenge Selected</h3>
+              <p>Select a challenge from the left to manage its hints</p>
+            </div>
+
+            <div id="hintEditor" class="hint-editor" style="display: none">
+              <div class="hint-editor-header">
+                <h3 id="selectedChallengeName"></h3>
+                <button class="btn-primary" onclick="addNewHint()">
+                  Add Hint
+                </button>
+              </div>
+
+              <div class="hints-list" id="hintsList"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="section-users" class="admin-section">
+        <div class="section-header">
+          <h1>User Management</h1>
+          <p class="section-subtitle">Manage platform users and permissions</p>
+        </div>
+
+        <div class="filters-bar">
+          <select
+            class="filter-select"
+            id="roleFilter"
+            onchange="filterUsers()"
+          >
+            <option value="All">All Users</option>
+            <option value="admin">Admin Only</option>
+          </select>
+        </div>
+
+        <div class="table-container">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Display Name</th>
+                <th>Role</th>
+                <th>Score</th>
+                <th>Created Date</th>
+                <!-- <th>Status</th> -->
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="usersTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="section-submissions" class="admin-section">
+        <div class="section-header">
+          <h1>Submission History</h1>
+        </div>
+
+        <div class="filters-bar">
+          <input
+            type="text"
+            class="search-input"
+            placeholder=" Search submissions..."
+            id="submissionSearch"
+            onkeyup="filterSubmissions()"
+          />
+        </div>
+
+        <div class="table-container">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>User</th>
+                <th>Challenge</th>
+                <th>Flag Submitted</th>
+                <th>Result</th>
+                <th>Points</th>
+                <th>Hints Used</th>
+                <th>Submitted At</th>
+              </tr>
+            </thead>
+            <tbody id="submissionsTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="section-statistics" class="admin-section">
+        <div class="section-header">
+          <h1>Advanced Statistics</h1>
+          <p class="section-subtitle">Detailed analytics and insights</p>
+        </div>
+      </section>
+      <section id="section-files" class="admin-section">
+        <div class="section-header">
+          <h1>Admin Activity Log</h1>
+          <p class="section-subtitle">Track all admin actions and changes</p>
+        </div>
+      </section>
+      <section id="section-settings" class="admin-section">
+        <div class="section-header">
+          <h1>Platform Settings</h1>
+          <p class="section-subtitle">Configure platform options</p>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="admin.js"></script>
+  </body>
+</html>

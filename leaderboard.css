@@ -1,0 +1,1187 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary: #00ff88;
+  --secondary: #00d4ff;
+  --danger: #ff0066;
+  --warning: #ffaa00;
+  --success: #00ff88;
+  --dark: #0a0e27;
+  --darker: #050714;
+  --light: #ffffff;
+  --gray: #8892b0;
+  --purple: #9c88ff;
+  --gold: #ffd700;
+  --silver: #c0c0c0;
+  --bronze: #cd7f32;
+}
+
+body {
+  font-family: "Kanit", "Inter", system-ui, -apple-system, sans-serif;
+  background: linear-gradient(135deg, #0a0e27 0%, #050714 100%);
+  color: var(--light);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Stats and numbers
+.rank-number,
+.player-points,
+.xp,
+.rank-widget-number {
+    font-family: 'Space Grotesk', 'Inter', sans-serif;
+} */
+
+/* Cyber Grid Background */
+/* home.css (CRITICAL: Prevents horizontal shift and flicker) */
+
+.nav-user-area {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  /* FIX: Reserve horizontal space immediately */
+  min-width: 180px;
+  height: 40px;
+}
+
+/* Ensures the hidden elements are aggressively removed from the layout flow */
+.loading-hidden {
+  visibility: hidden !important;
+  opacity: 0 !important;
+  position: absolute !important;
+  top: -9999px;
+}
+
+.cyber-grid {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(rgba(0, 255, 136, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 136, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: gridMove 20s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes gridMove {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(50px, 50px);
+  }
+}
+
+/* Floating particles */
+.particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: var(--primary);
+  border-radius: 50%;
+  animation: float 15s linear infinite;
+  opacity: 0.6;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-100px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Navigation */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(10, 14, 39, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 1rem 2rem;
+  z-index: 1000;
+  border-bottom: 2px solid var(--primary);
+  box-shadow: 0 4px 30px rgba(0, 255, 136, 0.3);
+}
+
+.nav-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  background: linear-gradient(45deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-link {
+  color: var(--light);
+  text-decoration: none;
+  position: relative;
+  transition: all 0.3s;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  font-weight: 500;
+}
+
+.nav-link:hover:not(.sign-in-btn) {
+  color: var(--primary);
+  background: rgba(0, 255, 136, 0.1);
+  transform: translateY(-2px);
+}
+
+.sign-in-btn {
+  background: linear-gradient(
+    45deg,
+    var(--primary),
+    var(--secondary)
+  ) !important;
+  color: var(--dark) !important;
+  font-weight: bold !important;
+  border-radius: 25px !important;
+  padding: 0.8rem 1.5rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  border: 2px solid var(--primary) !important;
+  transition: all 0.3s ease !important;
+  margin-left: 1rem !important;
+}
+
+.sign-in-btn:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 10px 25px rgba(0, 255, 136, 0.4) !important;
+  background: linear-gradient(
+    45deg,
+    var(--secondary),
+    var(--primary)
+  ) !important;
+}
+.nav-user-area {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* avatar ปุ่มด้านขวา */
+.profile-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.2rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(0, 255, 136, 0.15);
+  border: 1px solid rgba(0, 255, 136, 0.6);
+  text-decoration: none;
+  color: var(--light);
+  font-weight: 500;
+  transition: all 0.25s ease;
+}
+
+.profile-pill:hover {
+  background: rgba(0, 255, 136, 0.25);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 255, 136, 0.4);
+}
+
+.nav-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--primary);
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.6);
+}
+
+#navUsername {
+  max-width: 120px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.9rem;
+  color: var(--light);
+  opacity: 0.9;
+}
+
+/* Main Content */
+.main-content {
+  margin-top: 80px;
+  padding: 2rem;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  z-index: 10;
+}
+
+/* Leaderboard Header */
+.leaderboard-header {
+  text-align: center;
+  padding: 2rem 0 3rem;
+}
+
+.page-title {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(45deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.trophy-icon {
+  font-size: 3.5rem;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: var(--gray);
+}
+
+/* Podium Section */
+.podium-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 2rem;
+  margin: 3rem 0 4rem;
+  flex-wrap: wrap;
+}
+
+.podium-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.podium-avatar {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.avatar-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, var(--primary), var(--secondary));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--dark);
+  position: relative;
+  z-index: 2;
+}
+
+.first-place .avatar-circle {
+  width: 100px;
+  height: 100px;
+  font-size: 2rem;
+}
+
+.crown {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2rem;
+  z-index: 3;
+}
+
+.first-place .crown {
+  font-size: 2.5rem;
+  top: -25px;
+}
+
+.podium-info {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.podium-info h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.3rem;
+  color: var(--light);
+}
+
+.first-place .podium-info h3 {
+  font-size: 1.5rem;
+  color: var(--gold);
+}
+
+.level {
+  color: var(--gray);
+  font-size: 0.9rem;
+  margin-bottom: 0.2rem;
+}
+
+.xp {
+  color: var(--primary);
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.podium-base {
+  width: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px 10px 0 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.podium-base::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  animation: shimmer 3s linear infinite;
+}
+
+.first {
+  height: 100px;
+  background: linear-gradient(135deg, var(--gold), #b8860b);
+  order: 2;
+}
+
+.second {
+  height: 80px;
+  background: linear-gradient(135deg, var(--silver), #708090);
+  order: 1;
+}
+
+.third {
+  height: 60px;
+  background: linear-gradient(135deg, var(--bronze), #8b4513);
+  order: 3;
+}
+
+.rank-number {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--light);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) rotate(45deg);
+  }
+}
+
+/* Leaderboard Container */
+.leaderboard-container {
+  background: rgba(10, 14, 39, 0.8);
+  border: 1px solid var(--primary);
+  border-radius: 20px;
+  padding: 2rem;
+  margin: 2rem 0;
+  backdrop-filter: blur(10px);
+  position: relative;
+}
+
+/* Current Rank Widget */
+.current-rank-widget {
+  position: absolute;
+  transform: scale(0.75);
+  transform-origin: top right;
+  top: 1rem;
+  right: 1rem;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 170, 0, 0.2),
+    rgba(0, 255, 136, 0.15)
+  );
+  border: 2px solid var(--warning);
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: center;
+  min-width: 120px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 25px rgba(255, 170, 0, 0.4);
+  animation: rankPulse 3s ease-in-out infinite alternate;
+}
+
+@keyframes rankPulse {
+  from {
+    box-shadow: 0 8px 25px rgba(255, 170, 0, 0.4);
+    border-color: var(--warning);
+  }
+  to {
+    box-shadow: 0 12px 35px rgba(202, 197, 187, 0.6);
+    border-color: #ffcc00;
+  }
+}
+
+.rank-widget-header {
+  font-size: 0.75rem;
+  color: var(--gray);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.rank-widget-number {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--warning);
+  margin-bottom: 0.3rem;
+  text-shadow: 0 0 15px rgba(255, 170, 0, 0.8), 0 0 25px rgba(255, 170, 0, 0.6);
+}
+
+.rank-widget-total {
+  font-size: 0.7rem;
+  color: var(--secondary);
+  opacity: 0.9;
+}
+
+/* Highlight items with same XP as user */
+.leaderboard-item.near-user {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 170, 0, 0.1),
+    rgba(0, 255, 136, 0.05)
+  );
+  border: 1px solid rgba(255, 170, 0, 0.4);
+  box-shadow: 0 4px 15px rgba(255, 170, 0, 0.2);
+}
+
+.near-user .rank-number {
+  color: var(--warning);
+  text-shadow: 0 0 8px rgba(255, 170, 0, 0.5);
+}
+
+.leaderboard-controls {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 0.5rem;
+  background: rgba(0, 255, 136, 0.1);
+  padding: 0.3rem;
+  border-radius: 25px;
+  border: 1px solid rgba(0, 255, 136, 0.3);
+}
+
+.filter-btn {
+  padding: 0.7rem 1.5rem;
+  background: transparent;
+  color: var(--gray);
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-weight: 500;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+  background: var(--primary);
+  color: var(--dark);
+}
+
+/* Leaderboard List */
+.leaderboard-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.leaderboard-item {
+  /* Removed display: flex; as it conflicts with the new grid layout below */
+  align-items: center;
+  padding: 1rem;
+  background: rgba(0, 255, 136, 0.05);
+  border: 1px solid rgba(0, 255, 136, 0.2);
+  border-radius: 12px;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+/* REMOVED HOVER EFFECT AS REQUESTED */
+/*
+.leaderboard-item:hover {
+    background: rgba(0, 255, 136, 0.1);
+    border-color: var(--primary);
+    transform: translateX(5px);
+}
+*/
+
+.leaderboard-item.top-3 {
+  border: 2px solid;
+  background: rgba(255, 215, 0, 0.1);
+}
+
+.leaderboard-item.rank-1 {
+  border-color: var(--gold);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+.leaderboard-item.rank-2 {
+  border-color: var(--silver);
+  box-shadow: 0 0 20px rgba(192, 192, 192, 0.3);
+}
+
+.leaderboard-item.rank-3 {
+  border-color: var(--bronze);
+  box-shadow: 0 0 20px rgba(205, 127, 50, 0.3);
+}
+
+.rank-number {
+  font-size: 1.5rem;
+  font-weight: bold;
+  width: 60px; /* Keep this for podium, but ignore for the list now */
+  text-align: center;
+  color: white;
+}
+
+.rank-number.gold {
+  color: var(--gold);
+}
+.rank-number.silver {
+  color: var(--silver);
+}
+.rank-number.bronze {
+  color: var(--bronze);
+}
+
+.player-info {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  margin-left: 1rem;
+}
+
+.player-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, var(--primary), var(--secondary));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: var(--dark);
+  margin-right: 1rem;
+}
+
+.player-details h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.2rem;
+  color: var(--light);
+}
+
+.player-level {
+  color: var(--primary); /* เปลี่ยนจาก var(--gray) */
+  font-size: 0.9rem;
+  font-weight: 500; /* เพิ่ม weight */
+}
+
+.level {
+  color: var(--primary); /* เปลี่ยนจาก var(--gray) */
+  font-size: 0.9rem;
+  margin-bottom: 0.2rem;
+  font-weight: 500; /* เพิ่ม weight */
+}
+
+.player-points {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--secondary);
+  margin-right: 1rem;
+}
+
+/* User Rank Highlight - Simple Version */
+.user-rank-highlight {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 2px solid var(--primary);
+  position: relative;
+}
+
+.rank-indicator {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.your-rank-label {
+  background: var(--primary);
+  color: var(--dark);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.user-rank-simple {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 255, 136, 0.15),
+    rgba(0, 212, 255, 0.1)
+  );
+  border: 2px solid var(--primary);
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  min-height: 120px;
+}
+
+.user-rank-simple::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(0, 255, 136, 0.2),
+    transparent
+  );
+  animation: shimmer 2s linear infinite;
+}
+
+.rank-number-large {
+  font-size: 4rem;
+  font-weight: bold;
+  color: var(--warning);
+  text-shadow: 0 0 20px rgba(255, 170, 0, 0.8), 0 0 40px rgba(255, 170, 0, 0.6),
+    0 0 60px rgba(255, 170, 0, 0.4);
+  position: relative;
+  z-index: 1;
+  animation: rankGlow 3s ease-in-out infinite alternate;
+}
+.points {
+  color: var(--primary);
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+@keyframes rankGlow {
+  from {
+    text-shadow: 0 0 20px rgba(255, 170, 0, 0.8),
+      0 0 40px rgba(255, 170, 0, 0.6), 0 0 60px rgba(255, 170, 0, 0.4);
+  }
+  to {
+    text-shadow: 0 0 30px rgba(255, 170, 0, 1), 0 0 60px rgba(255, 170, 0, 0.8),
+      0 0 80px rgba(255, 170, 0, 0.6);
+  }
+}
+
+/* ======================================================= */
+/* !!! CORE FIX FOR LEADERBOARD COLUMN ALIGNMENT (GRID) !!!*/
+/* ======================================================= */
+
+/* 1. Base style for the header and content rows */
+.leaderboard-header-row,
+.leaderboard-list .leaderboard-row {
+  display: grid;
+  /* Define 4 columns: Rank (fixed), User (flexible), Solved (fixed), Points (fixed) */
+  grid-template-columns: 60px 1fr 100px 120px;
+  gap: 10px;
+  align-items: center;
+  /* Reset padding from the .leaderboard-item style to match the new grid structure */
+  padding: 0 1rem;
+}
+
+/* 2. Styling for the static HTML header row */
+.leaderboard-header-row {
+  font-weight: bold;
+  color: var(--gray);
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  padding: 1rem; /* Padding to match the rows */
+  margin-bottom: 0.5rem;
+  border-bottom: 2px solid rgba(0, 255, 136, 0.2);
+}
+
+/* 3. Align text within the static HTML header columns */
+.leaderboard-header-row .col-rank {
+  text-align: center;
+}
+.leaderboard-header-row .col-solved,
+.leaderboard-header-row .col-points {
+  text-align: right;
+}
+
+/* 4. Overwrite/adjust styles for the JS-generated items */
+.leaderboard-list .leaderboard-row {
+  /* These rows are now generated with a class 'leaderboard-row' */
+  padding: 1rem; /* Apply padding back to the row for visual space */
+
+  /* Inherited styles from .leaderboard-item (border, background) */
+  background: rgba(0, 255, 136, 0.05);
+  border: 1px solid rgba(0, 255, 136, 0.2);
+  border-radius: 12px;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 5. Align content within the JS-generated columns */
+.leaderboard-list .leaderboard-row .col.rank {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: gray;
+}
+
+.leaderboard-list .leaderboard-row .col.solved,
+.leaderboard-list .leaderboard-row .col.points {
+  text-align: right;
+  font-size: 1.2rem; /* Match the .player-points size */
+  font-weight: bold;
+}
+
+/* 6. Fix the avatar/user info alignment within the 'User' column (col.user) */
+.leaderboard-list .leaderboard-row .col.user .user-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* 7. NEW: TOP 3 RANK COLORING */
+.leaderboard-list .rank-gold-row .col.rank {
+  color: var(--gold) !important;
+}
+.leaderboard-list .rank-silver-row .col.rank {
+  color: var(--silver) !important;
+}
+.leaderboard-list .rank-bronze-row .col.rank {
+  color: var(--bronze) !important;
+}
+
+/* ======================================================= */
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .podium-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .podium-item {
+    width: 100%;
+    max-width: 300px;
+    order: unset !important;
+  }
+
+  .page-title {
+    font-size: 2rem;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .nav-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .sign-in-btn {
+    margin-left: 0 !important;
+  }
+
+  .filter-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .user-rank-simple {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+
+  .rank-number-large {
+    font-size: 3rem;
+  }
+
+  /* Adjust Grid for smaller screens */
+  .leaderboard-header-row,
+  .leaderboard-list .leaderboard-row {
+    /* Reduce fixed widths on mobile */
+    grid-template-columns: 40px 1fr 80px 100px;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* --- HAMBURGER MENU STYLES (REQUIRED FOR TOGGLE) --- */
+/* ------------------------------------------------------------------ */
+
+/* ซ่อนปุ่ม Hamburger บนหน้าจอเดสก์ท็อป (ขนาดใหญ่) */
+.hamburger-menu {
+  display: none;
+}
+
+/* ลบสไตล์การโฟกัสเริ่มต้นที่ไม่ต้องการบนปุ่ม */
+#hamburgerBtn:focus,
+#hamburgerBtn:active {
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+/* ------------------------------------------------------------------ */
+/* --- 1. สไตล์สำหรับ Profile Pill (แก้ไขปัญหาความกว้างชื่อผู้ใช้) --- */
+/* ------------------------------------------------------------------ */
+
+/* สำหรับเม็ดโปรไฟล์ทั้งหมด (รวม avatar และ username) */
+.profile-pill {
+  display: flex;
+  align-items: center;
+  max-width: 150px; /* จำกัดความกว้างรวมของเม็ดโปรไฟล์ */
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis; /* แสดง ... เมื่อชื่อยาวเกิน */
+}
+
+/* สำหรับ Avatar */
+.nav-avatar {
+  flex-shrink: 0; /* Avatar ไม่ย่อ */
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+/* สำหรับชื่อผู้ใช้โดยเฉพาะ */
+#navUsername {
+  flex-shrink: 1; /* ชื่อผู้ใช้ยอมย่อ */
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding-left: 0.5rem; /* ระยะห่างจาก avatar */
+}
+
+/* ------------------------------------------------------------------ */
+/* --- 2. สไตล์สำหรับ Hamburger Menu (Mobile Toggle) --- */
+/* ------------------------------------------------------------------ */
+
+/* ซ่อนปุ่ม Hamburger บนหน้าจอเดสก์ท็อป */
+.hamburger-menu {
+  display: none;
+}
+
+/* ลบสไตล์การโฟกัสเริ่มต้นที่ไม่ต้องการบนปุ่ม */
+#hamburgerBtn:focus,
+#hamburgerBtn:active {
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+/* --- MEDIA QUERY สำหรับหน้าจอขนาดเล็ก (Mobile) --- */
+
+/* --- MEDIA QUERY สำหรับหน้าจอขนาดเล็ก (Mobile) --- */
+
+@media (max-width: 768px) {
+  /* ------------------------------------------- */
+  /* 1. NAVIGATION BAR (HAMBURGER TOGGLE) */
+  /* ------------------------------------------- */
+
+  /* Nav Container: ต้องใช้ flex-wrap เพื่อให้เมนูลงมาบรรทัดใหม่ได้ */
+  .nav-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem; /* ลด gap โดยรวม */
+  }
+
+  /* แสดงปุ่มแฮมเบอร์เกอร์และจัดตำแหน่ง */
+  .hamburger-menu {
+    display: block;
+    order: 2;
+  }
+
+  .logo {
+    order: 1;
+  }
+
+  #hamburgerBtn {
+    /* ... (สไตล์ปุ่มยังคงเดิม) ... */
+    background: transparent !important;
+    border: none !important;
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none !important;
+    box-shadow: none !important;
+    font-size: 2.5rem;
+    color: var(--primary) !important;
+    cursor: pointer;
+    padding: 0.2rem 0.5rem 0.2rem 1rem !important;
+  }
+
+  /* ซ่อนลิงก์เมนูหลักตามค่าเริ่มต้นบนมือถือ */
+  .nav-links {
+    display: none; /* ซ่อนตามค่าเริ่มต้น */
+    width: 100%; /* สำคัญ: เต็มความกว้างเพื่อให้ลงมาอยู่แถวที่สาม */
+    flex-direction: column;
+    align-items: center;
+    padding-top: 1rem;
+    order: 3;
+  }
+
+  /* จัดการลิงก์ภายในเมนู */
+  .nav-links .nav-link {
+    padding: 0.5rem 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  /* ****************************************************** */
+  /* *** สไตล์ Nav User Area และ Profile Pill (CRITICAL FIX) *** */
+  /* ****************************************************** */
+  .nav-user-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .nav-user-area .sign-in-btn {
+    /* CRITICAL FIX 1: Ensure it's a block element to use margin: auto correctly */
+    display: block !important;
+    /* CRITICAL FIX 2: Ensure text is centered within the button */
+    text-align: center !important;
+    /* Ensure spacing and width */
+    margin: 0.5rem auto !important;
+    width: 90%;
+    max-width: 300px;
+  }
+
+  .nav-user-area .profile-pill {
+    /* Set the pill width and center it */
+    width: 50%;
+    max-width: 250px;
+    margin: 0.5rem auto;
+
+    /* Use flex on the pill itself to center content (avatar/username) */
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+  }
+
+  /* 4. KEY: แสดงเมนูเมื่อ nav-container มีคลาส 'menu-active' */
+  .nav-container.menu-active .nav-links {
+    display: flex;
+    padding-bottom: 1rem;
+  }
+
+  /* ------------------------------------------- */
+  /* 2. LEADERBOARD HEADER & WIDGET */
+  /* ------------------------------------------- */
+
+  .main-content {
+    padding: 1rem; /* ลด padding โดยรวม */
+  }
+
+  .leaderboard-header {
+    padding: 1rem 0 2rem;
+  }
+
+  .page-title {
+    font-size: 2rem;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  /* แก้ไข Current Rank Widget */
+  .current-rank-widget {
+    transform: none; /* ลบ scale(0.75) */
+    position: relative;
+    top: unset;
+    right: unset;
+    margin-bottom: 1.5rem;
+    width: 100%; /* ใช้ความกว้างเต็มจอ */
+    text-align: center; /* จัดข้อความให้อยู่ตรงกลาง */
+  }
+
+  .rank-widget-number {
+    font-size: 1.5rem;
+  }
+
+  /* ------------------------------------------- */
+  /* 3. PODIUM SECTION - บังคับให้เป็นแนวนอน (Flex-direction: row) */
+  /* ------------------------------------------- */
+  .podium-container {
+    display: flex; /* ต้องมั่นใจว่าเป็น flex */
+    flex-direction: row; /* <--- เปลี่ยนเป็น ROW เพื่อให้อยู่แนวนอน */
+    justify-content: center; /* จัดให้อยู่ตรงกลางจอ */
+    align-items: flex-end; /* จัดให้ฐาน Podium อยู่แนวเดียวกัน */
+    gap: 0.5rem; /* ลดช่องว่างระหว่าง Podium Item */
+    margin: 1rem 0 2rem;
+    flex-wrap: nowrap; /* ป้องกันไม่ให้ขึ้นบรรทัดใหม่ */
+  }
+
+  .podium-item {
+    /* ลดความกว้างสูงสุดเพื่อให้มีที่ว่างสำหรับ 3 องค์ประกอบ */
+    width: 30%; /* ให้แต่ละอันใช้ประมาณ 1 ใน 3 ของพื้นที่ */
+    max-width: 100px; /* จำกัดความกว้างสูงสุดของแต่ละไอเทม */
+    /* ยกเลิกการสั่งเรียงเพื่อคงลำดับ 2, 1, 3 (ซึ่งควรจัดการใน HTML/JS) */
+    order: unset !important;
+  }
+
+  /* ปรับขนาด Podium Item ทั้งหมดให้เล็กลง */
+  .first-place .avatar-circle {
+    width: 60px; /* ลดขนาด Avatar อันดับ 1 */
+    height: 60px;
+    font-size: 01.2rem;
+  }
+
+  .avatar-circle {
+    width: 45px; /* ลดขนาด Avatar อันดับ 2 และ 3 */
+    height: 45px;
+    font-size: 1rem;
+  }
+  .podium-info h3 {
+    font-size: 0.9rem; /* ลดขนาดชื่อผู้ใช้ */
+  }
+
+  .level,
+  .xp {
+    font-size: 0.7rem; /* ลดขนาด Solved/Points */
+  }
+
+  .podium-base {
+    width: 100%; /* ให้ฐานเต็มความกว้างของ podium-item นั้นๆ */
+  }
+
+  .rank-number {
+    font-size: 1.5rem; /* ลดขนาดตัวเลขลำดับ */
+  }
+
+  .crown {
+    font-size: 1.2rem; /* <-- ลดขนาดมงกุฎ/เหรียญบนมือถือ */
+    top: -10px; /* ปรับตำแหน่งให้เหมาะสม */
+  }
+
+  .first-place .crown {
+    font-size: 1.5rem; /* <-- ลดขนาดมงกุฎอันดับ 1 บนมือถือ */
+    top: -15px; /* ปรับตำแหน่งให้เหมาะสม */
+  }
+
+  /* ------------------------------------------- */
+  /* 4. LEADERBOARD LIST (TABLE GRID) */
+  /* ------------------------------------------- */
+
+  .leaderboard-header-row,
+  .leaderboard-list .leaderboard-row {
+    /* ปรับ Grid Columns สำหรับมือถือ: 
+           Rank (30px), User (1fr), Solved (60px), Points (80px) */
+    grid-template-columns: 30px 1fr 60px 80px;
+    gap: 5px;
+    padding: 0.5rem;
+  }
+
+  /* ปรับขนาดฟอนต์ในตาราง */
+  .leaderboard-list .leaderboard-row .col.rank {
+    font-size: 1.2rem;
+  }
+  .leaderboard-list .leaderboard-row .col.points,
+  .leaderboard-list .leaderboard-row .col.solved {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  .leaderboard-list .leaderboard-row .col.user .user-meta {
+    /* ปรับ gap ใน user meta */
+    gap: 0.5rem;
+  }
+}

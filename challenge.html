@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy"
+          content="
+          default-src 'self' https://*;
+          script-src 'self' 'unsafe-inline' 'unsafe-eval'
+              https://cdn.jsdelivr.net
+              https://unpkg.com
+              https://esm.sh
+              https://*.supabase.co
+              https://fonts.googleapis.com
+              https://fonts.gstatic.com
+              https://*;
+          style-src 'self' 'unsafe-inline'
+              https://fonts.googleapis.com
+              https://cdn.jsdelivr.net
+              https://unpkg.com
+              https://*;
+          font-src 'self' data:
+              https://fonts.gstatic.com
+              https://*;
+          img-src 'self' data: blob:
+              https://*;
+          connect-src 'self'
+              https://*.supabase.co
+              wss://*.supabase.co
+              https://*
+              wss://*;
+          media-src 'self' https://* blob:;
+          frame-src 'self' https://*;
+          object-src 'none';
+          base-uri 'self';
+          frame-ancestors 'self';
+          ">
+    <title>secXplore - Challenges</title>
+    <link rel="stylesheet" href="challenge.css">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://unpkg.com https://*.supabase.co; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://*.supabase.co wss://*.supabase.co; frame-ancestors 'none';">
+</head>
+<body>
+<div class="cyber-grid"></div>
+    <div class="particles" id="particles"></div>
+
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <span>logo</span>
+                <span>secXplore</span>
+            </div>
+            <div class="nav-links">
+                <a href="home.html" class="nav-link">Home</a>
+                <a href="challenge.html" class="nav-link">Challenges</a>
+                <a href="leaderboard.html" class="nav-link">Scoreboard</a>
+
+                <div class="nav-user-area">
+                    <!-- โหมด guest -->
+                    <a href="login.html" class="nav-link sign-in-btn" id="navSignInBtn">
+                        Sign In
+                    </a>
+
+                    <!-- โหมดที่ล็อกอินแล้ว -->
+                    <a href="profile.html" class="nav-link profile-pill" id="navProfileBtn" style="display:none">
+                        <img src="" alt="avatar" class="nav-avatar" id="navAvatar">
+                        <span id="navUsername">@user</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <section class="hero" id="home">
+            <h1>secXplore</h1>
+            <p>Interactive Capture The Flag Platform</p>
+        </section>
+
+        <section id="challenges">
+            <h2 style="text-align: center; margin-bottom: 2rem; font-size: 2.5rem; color: var(--primary);">Categories</h2>
+            <div class="ctf-categories">
+                <div class="category-card" onclick="openChallengeList('web')">
+                    <span class="category-icon">🌐︎</span>
+                    <h3 class="category-title">Web Security</h3>
+                    <p class="category-description">การโจมตีและป้องกันเว็บแอปพลิเคชัน SQL Injection XSS และช่องโหว่ต่างๆ</p>
+                    <div class="category-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">4</span>
+                            <span class="stat-label">Challenges</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">0</span>
+                            <span class="stat-label">Solved</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">1100</span>
+                            <span class="stat-label">Max Points</span>
+                        </div>
+                    </div>
+                    <div class="difficulty-badges">
+                        <span class="difficulty-badge difficulty-easy">Easy</span>
+                        <span class="difficulty-badge difficulty-medium">Medium</span>
+                        <span class="difficulty-badge difficulty-hard">Hard</span>
+                    </div>
+                </div>
+
+                <div class="category-card" onclick="openChallengeList('crypto')">
+                    <span class="category-icon">🔐︎</span>
+                    <h3 class="category-title">Cryptography</h3>
+                    <p class="category-description">การถอดรหัส การวิเคราะห์ cipher และการทำลายระบบเข้ารหัส</p>
+                    <div class="category-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">4</span>
+                            <span class="stat-label">Challenges</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">0</span>
+                            <span class="stat-label">Solved</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">1200</span>
+                            <span class="stat-label">Max Points</span>
+                        </div>
+                    </div>
+                    <div class="difficulty-badges">
+                        <span class="difficulty-badge difficulty-easy">Easy</span>
+                        <span class="difficulty-badge difficulty-medium">Medium</span>
+                        <span class="difficulty-badge difficulty-hard">Hard</span>
+                    </div>
+                </div>
+
+                <div class="category-card" onclick="openChallengeList('forensics')">
+                    <span class="category-icon">🕵︎</span>
+                    <h3 class="category-title">Digital Forensics</h3>
+                    <p class="category-description">การวิเคราะห์หลักฐานดิจิทัล memory dump และการกู้คืนข้อมูล</p>
+                    <div class="category-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">4</span>
+                            <span class="stat-label">Challenges</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">0</span>
+                            <span class="stat-label">Solved</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">1300</span>
+                            <span class="stat-label">Max Points</span>
+                        </div>
+                    </div>
+                    <div class="difficulty-badges">
+                        <span class="difficulty-badge difficulty-easy">Easy</span>
+                        <span class="difficulty-badge difficulty-medium">Medium</span>
+                        <span class="difficulty-badge difficulty-hard">Hard</span>
+                    </div>
+                </div>
+
+                <div class="category-card" onclick="openChallengeList('network')">
+                    <span class="category-icon">🖧︎</span>
+                    <h3 class="category-title">Network Security</h3>
+                    <p class="category-description">การวิเคราะห์ packet การโจมตีเครือข่าย และ protocol exploitation</p>
+                    <div class="category-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">3</span>
+                            <span class="stat-label">Challenges</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">0</span>
+                            <span class="stat-label">Solved</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">1400</span>
+                            <span class="stat-label">Max Points</span>
+                        </div>
+                    </div>
+                    <div class="difficulty-badges">
+                        <span class="difficulty-badge difficulty-easy">Easy</span>
+                        <span class="difficulty-badge difficulty-medium">Medium</span>
+                        <span class="difficulty-badge difficulty-hard">Hard</span>
+                    </div>
+                </div>
+
+                <div class="category-card" onclick="openChallengeList('reverse')">
+                    <span class="category-icon">⚙︎</span>
+                    <h3 class="category-title">Reverse Engineering</h3>
+                    <p class="category-description">การถอดรหัส binary การวิเคราะห์ malware และ decompilation</p>
+                    <div class="category-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">4</span>
+                            <span class="stat-label">Challenges</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">0</span>
+                            <span class="stat-label">Solved</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">1500</span>
+                            <span class="stat-label">Max Points</span>
+                        </div>
+                    </div>
+                    <div class="difficulty-badges">
+                        <span class="difficulty-badge difficulty-easy">Easy</span>
+                        <span class="difficulty-badge difficulty-medium">Medium</span>
+                        <span class="difficulty-badge difficulty-hard">Hard</span>
+                    </div>
+                </div>
+
+                <div class="category-card" onclick="openChallengeList('mobile')">
+                    <span class="category-icon">📱︎</span>
+                    <h3 class="category-title">Mobile Security</h3>
+                    <p class="category-description">การวิเคราะห์ Android/iOS apps การ reverse APK และ exploitation</p>
+                    <div class="category-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">4</span>
+                            <span class="stat-label">Challenges</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">0</span>
+                            <span class="stat-label">Solved</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">1350</span>
+                            <span class="stat-label">Max Points</span>
+                        </div>
+                    </div>
+                    <div class="difficulty-badges">
+                        <span class="difficulty-badge difficulty-easy">Easy</span>
+                        <span class="difficulty-badge difficulty-medium">Medium</span>
+                        <span class="difficulty-badge difficulty-hard">Hard</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="modal" id="challengeModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle"></h2>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="progress-section">
+                <div class="progress-header">
+                    <span style="font-weight: bold;">Progress Overview</span>
+                    <span id="progressText">0 of 0 completed (0%)</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                </div>
+            </div>
+            <div class="challenge-list" id="challengeList"></div>
+        </div>
+    </div>
+
+    <div class="modal" id="interactiveModal">
+        <div class="modal-content">
+        <button class="back-challenge-btn" onclick="confirmBackToCategory()">
+            &times; Close
+        </button>
+            <div id="interactiveContent"></div>
+        </div>
+    </div>
+    <script type="module" src="challenge.js"></script>
+</body>
+</html>
