@@ -5138,7 +5138,9 @@ window.confirmBackToCategory = function() {
 };
 
 // Add at the END of challenge.js
-import { checkFlagSecure, loadChallengesSecure } from './challenge-secure.js';
+import { checkFlagSecure } from './challenge-secure.js';
+window.checkFlag = checkFlagSecure;
 
 // Replace the insecure checkFlag function
 window.checkFlag = checkFlagSecure;
+
