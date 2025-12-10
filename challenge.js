@@ -5007,11 +5007,6 @@ Content-Type: application/json
 // ============================================
 
 // Escape HTML to prevent XSS in terminal output
-function escapeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
-}
 
 // Toggle hint visibility
 window.toggleHint = function(hintId) {
@@ -5127,6 +5122,11 @@ window.openChallengeList = function(category) {
     });
 
     modal.classList.add('active');
+};
+
+window.openChallengeList = function(category) {
+    console.log("Selected:", category);
+    window.location.href = `challenge.html?category=${category}`;
 };
 
 window.closeModal = function() {
