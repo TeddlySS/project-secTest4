@@ -38,6 +38,7 @@ const ID_MAPPING = {
     'rootBypass': 'Root Detection Bypass',
     'sslPinning': 'SSL Pinning Challenge',
 };
+window.ID_MAPPING = ID_MAPPING;
 const FLAG_DOM_CONFIG = {
     sqlInjection: { input: 'sqlInjectionFlag', success: 'sqlSuccess', error: 'sqlError' },
     cmdInjection: { input: 'cmdInjectionFlag', success: 'cmdSuccess', error: 'cmdError' },
@@ -127,6 +128,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         
     if (!error && challenges) {
         dbChallenges = challenges;
+        window.dbChallenges = challenges; 
+        console.log("✅ Challenges loaded globally:", window.dbChallenges.length);
     }
 
     createParticles();
@@ -5136,6 +5139,7 @@ window.confirmBackToCategory = function() {
 window.checkFlag = checkFlagSecure;
 
 // Replace the insecure checkFlag function
+
 
 
 
