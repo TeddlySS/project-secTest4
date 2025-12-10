@@ -3,6 +3,7 @@
 // ============================================
 import { supabase } from './supabaseClient.js';
 import { setupNavUser } from './navAuth.js';
+import { checkFlagSecure, loadChallengesSecure } from './challenge-secure.js';
 
 let currentUser = null;
 let dbChallenges = []; // เก็บข้อมูลโจทย์ทั้งหมดจาก DB เพื่อลด Request
@@ -5124,11 +5125,6 @@ window.openChallengeList = function(category) {
     modal.classList.add('active');
 };
 
-window.openChallengeList = function(category) {
-    console.log("Selected:", category);
-    window.location.href = `challenge.html?category=${category}`;
-};
-
 window.closeModal = function() {
     document.getElementById('challengeModal').classList.remove('active');
 };
@@ -5137,10 +5133,9 @@ window.confirmBackToCategory = function() {
     document.getElementById('interactiveModal').classList.remove('active');
 };
 
-// Add at the END of challenge.js
-import { checkFlagSecure } from './challenge-secure.js';
 window.checkFlag = checkFlagSecure;
 
 // Replace the insecure checkFlag function
+
 
 
