@@ -5142,5 +5142,5 @@ import { checkFlagSecure } from './challenge-secure.js';
 window.checkFlag = checkFlagSecure;
 
 // Replace the insecure checkFlag function
-window.checkFlag = checkFlagSecure;
+
 
